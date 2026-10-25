@@ -1,0 +1,15 @@
+def show_menu():
+    print("\n" + "=" * 52)
+    print("          STUDENT ASSESSMENT ANALYZER")
+    print("=" * 52)
+    print("1.  Student Directory")
+    print("2.  Academic Results")
+    print("3.  Search Student Report")
+    print("4.  Class Statistics")
+    print("5.  Subject Comparison")
+    print("6.  Merit List")
+    print("7.  Attendance Watchlist")
+    print("0.  Close Application")
+    print("-" * 52)
+    
+    return input("Choose an option: ").strip()
