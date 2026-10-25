@@ -1,4 +1,5 @@
 import pandas as pd
+import sys
 
 from modules.menu import show_menu
 from modules.input_handler import get_roll_number, pause_screen
@@ -9,14 +10,19 @@ from modules import reports
 
 def load_students():
     """Load and validate the CSV dataset."""
+    if len(sys.argv)!=2:
+        print("Invalid Command!. Use command: python main.py <Path to your csv file>")
+        sys.exit(1)
     try:
-        data = pd.read_csv("Students_records.csv", dtype={"Roll_no": str})
+        data = pd.read_csv(sys.argv[1], dtype={"Roll_no": str})
         data["Roll_no"] = data["Roll_no"].str.strip()
 
         return validate_dataset(data)
 
     except FileNotFoundError:
-        print("Error: Students_records.csv was not found in the project folder.")
+        print(f"Error: CSV file '{sys.argv[1]}' was not found in the project folder.")
+    except pd.errors.EmptyDataError:
+        print("Dataset Error:CSV file is empty")
     except (ValueError, KeyError) as error:
         print("Dataset error:", error)
     except pd.errors.ParserError:
